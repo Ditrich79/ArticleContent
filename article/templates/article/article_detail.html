@@ -1,0 +1,16 @@
+{% extends 'article/_base.html' %}
+{% block title %}
+	{{ article.title }}
+{% endblock %}
+
+{% block content %}
+	<h2>{{ article.title }}</h2>
+    <p class="date">Опубликован {{ article.publish }} {{ article.user }}</p>
+    {{ article.body|linebreaks }}
+    <div class="image">
+        <img src="{{ article.picture.url }}" alt="picture">
+    </div>
+    <p>
+        <a href="{% url 'article:article_share' article.id %}">Share this article</a>
+    </p>
+{% endblock %}
