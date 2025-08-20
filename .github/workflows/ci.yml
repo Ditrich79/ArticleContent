@@ -29,7 +29,7 @@ jobs:
         run: |
           python --version
           python -c "import django; print('Django', django.get_version())"
-          python -c "import djangorestframework; print('DRF', djangorestframework.__version__)"
+          python -c "import rest_framework; print('DRF', rest_framework.__version__)"
 
       - name: Check migrations
         run: |
