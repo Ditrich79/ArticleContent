@@ -1,5 +1,6 @@
-from article.models import Article, Category, Comment
 import pytest
+
+from article.models import Article, Category, Comment
 
 
 @pytest.mark.django_db
@@ -13,13 +14,17 @@ def test_article_str_representation():
 def test_article_get_absolute_url(published_article):
     """Проверяем, что get_absolute_url возвращает правильный URL."""
     article = published_article
-    expected_url = f"/{article.publish.year}/{article.publish.month}/{article.publish.day}/{article.slug}/"
+    expected_url = (f"/{article.publish.year}/"
+                    f"{article.publish.month}/"
+                    f"{article.publish.day}/"
+                    f"{article.slug}/")
     assert article.get_absolute_url() == expected_url
 
 
 @pytest.mark.django_db
 def test_article_published_manager(published_article, draft_article):
-    """Проверяем, что менеджер published возвращает только опубликованные статьи."""
+    """Проверяем, что менеджер
+    published возвращает только опубликованные статьи."""
     assert published_article in Article.published.all()
     assert draft_article not in Article.published.all()
     assert Article.published.count() == 1
@@ -34,7 +39,7 @@ def test_category_str_representation():
 
 @pytest.mark.django_db
 def test_comment_str_representation(published_article):
-    comment = Comment(name='Nick')
+    comment = Comment(name="Nick")
     comment.article = published_article
     assert str(comment) == "Comment by Nick on Test Article."
 

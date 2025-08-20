@@ -41,7 +41,7 @@ jobs:
 
       - name: Run linter (flake8)
         run: |
-          flake8 . --exclude=__pycache__,migrations,venv,.git
+          flake8 . --exclude=__pycache__,migrations,.venv,.git
 
       - name: Check code formatting (black)
         run: |
